@@ -5,10 +5,10 @@ import axios from "axios";
 
 const ImageSearch = () => {
   const [SearchQuery, setSearchQuery] = useState("");
+  const [imageList, setImageList] = useState([]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(SearchQuery);
 
     axios
       .get("https://api.unsplash.com/search/photos", {
@@ -21,6 +21,7 @@ const ImageSearch = () => {
       })
       .then((response) => {
         console.log(response.data.results);
+        setImageList(response.data.results);
       })
       .catch((error) => {
         console.log(error);
