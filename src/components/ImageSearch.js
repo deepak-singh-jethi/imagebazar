@@ -1,31 +1,35 @@
 //boiler code of React with main function same a file name and export
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+console.log("Image.js", process.env.REACT_APP_UNSPLASH_ACCESS_KEY);
 const ImageSearch = ({ setImageList }) => {
   const [SearchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    console.log(SearchQuery);
+    if (e) {
+      e.preventDefault();
+    }
     axios
       .get("https://api.unsplash.com/search/photos", {
         headers: {
           "Accept-Version": "v1",
-          Authorization:
-            "Client-ID Y8xqDQb7fqK4coR3ERdK4s8z5-aPqUl0t3FY0b69iQQ",
+          Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`,
         },
-        params: { query: SearchQuery, per_page: 20 },
+        params: { query: SearchQuery || "random", per_page: 42 },
       })
       .then((response) => {
-        console.log(response.data.results);
         setImageList(response.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, []);
 
   return (
     <div>
