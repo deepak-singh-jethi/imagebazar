@@ -37,7 +37,7 @@ const ImageSearch = ({ setImageList }) => {
       <form onSubmit={handleSearch}>
         <input
           type="text"
-          placeholder="Enter Search"
+          placeholder="Search Image"
           value={SearchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}></input>
         <button type="submit">Search</button>
