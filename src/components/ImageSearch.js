@@ -3,13 +3,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const ImageSearch = () => {
+const ImageSearch = ({ setImageList }) => {
   const [SearchQuery, setSearchQuery] = useState("");
-  const [imageList, setImageList] = useState([]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-
+    console.log(SearchQuery);
     axios
       .get("https://api.unsplash.com/search/photos", {
         headers: {
@@ -17,7 +16,7 @@ const ImageSearch = () => {
           Authorization:
             "Client-ID Y8xqDQb7fqK4coR3ERdK4s8z5-aPqUl0t3FY0b69iQQ",
         },
-        params: { query: SearchQuery },
+        params: { query: SearchQuery, per_page: 20 },
       })
       .then((response) => {
         console.log(response.data.results);

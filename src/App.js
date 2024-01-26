@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ImageSearch from "./components/ImageSearch";
 import ImageGallery from "./components/ImageGallery";
 import "./App.css";
 
 function App() {
+  const [imageList, setImageList] = useState([]);
   return (
     <div className="App">
-      <ImageSearch />
-      <ImageGallery />
+      <ImageSearch setImageList={setImageList} />
+      <ImageGallery imageList={imageList} />
     </div>
   );
 }
