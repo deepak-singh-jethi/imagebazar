@@ -11,13 +11,14 @@ const ImageSearch = ({ setImageList }) => {
     if (e) {
       e.preventDefault();
     }
+    console.log(process.env.REACT_APP_UNSPLASH_ACCESS_KEY);
     axios
       .get("https://api.unsplash.com/search/photos", {
         headers: {
           "Accept-Version": "v1",
           Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`,
         },
-        params: { query: SearchQuery || "random", per_page: 42 },
+        params: { query: SearchQuery || "random", per_page: 34 },
       })
       .then((response) => {
         setImageList(response.data.results);
@@ -32,7 +33,7 @@ const ImageSearch = ({ setImageList }) => {
   }, []);
 
   return (
-    <div>
+    <div id="imageSearch">
       <form onSubmit={handleSearch}>
         <input
           type="text"
